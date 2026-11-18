@@ -90,5 +90,5 @@ VALUES
 INSERT INTO dbo.Usuarios
     (Correo, ClaveHash, Rol)
 VALUES
-    (N'herpetologo@serpentario.pe', N'$2a$11$0jN50x3h89vEwS/eX1w8.eI8eG7YqZ3o4JgN128Z4vL0F6l2mP4w2', N'Herpetologo'),
-    (N'laboratorio@serpentario.pe', N'$2a$11$0jN50x3h89vEwS/eX1w8.eI8eG7YqZ3o4JgN128Z4vL0F6l2mP4w2', N'TecnicoLaboratorio');
+    (N'herpetologo@serpentario.pe', N'$2a$11$YkVf2YWPGUL9Zy7LpuRjAO7d9mLXiHCqUwu2yc7M8z6ukIHIx0piu', N'Herpetologo'),
+    (N'laboratorio@serpentario.pe', N'$2a$11$YkVf2YWPGUL9Zy7LpuRjAO7d9mLXiHCqUwu2yc7M8z6ukIHIx0piu', N'TecnicoLaboratorio');

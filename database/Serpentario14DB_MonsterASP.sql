@@ -1,8 +1,3 @@
--- ============================================================================
--- Script Semana 14 para MonsterASP.NET (WebMSSQL / Adminer / SSMS)
--- Sin CREATE DATABASE, sin USE y sin comandos GO (T-SQL puro compatible con Web SQL).
--- ============================================================================
-
 IF OBJECT_ID(N'dbo.LotesVeneno', N'U') IS NOT NULL
     DROP TABLE dbo.LotesVeneno;
 
@@ -12,7 +7,6 @@ IF OBJECT_ID(N'dbo.EspeciesSerpiente', N'U') IS NOT NULL
 IF OBJECT_ID(N'dbo.Usuarios', N'U') IS NOT NULL
     DROP TABLE dbo.Usuarios;
 
--- 1. Tabla EspeciesSerpiente
 CREATE TABLE dbo.EspeciesSerpiente (
     EspecieId INT IDENTITY(1,1) NOT NULL,
     NombreCientifico NVARCHAR(120) NOT NULL,
@@ -28,7 +22,6 @@ CREATE TABLE dbo.EspeciesSerpiente (
     CONSTRAINT CK_EspeciesSerpiente_NivelPeligrosidad CHECK (NivelPeligrosidad BETWEEN 1 AND 5)
 );
 
--- 2. Tabla LotesVeneno
 CREATE TABLE dbo.LotesVeneno (
     LoteId INT IDENTITY(1,1) NOT NULL,
     CodigoLote NVARCHAR(30) NOT NULL,
@@ -51,7 +44,6 @@ CREATE TABLE dbo.LotesVeneno (
     CONSTRAINT CK_LotesVeneno_Fechas CHECK (FechaVencimiento > FechaExtraccion)
 );
 
--- 3. Tabla Usuarios (Semana 14: Roles de negocio propios y BCrypt)
 CREATE TABLE dbo.Usuarios (
     UsuarioId INT IDENTITY(1,1) NOT NULL,
     Correo NVARCHAR(150) NOT NULL,
@@ -63,7 +55,6 @@ CREATE TABLE dbo.Usuarios (
     CONSTRAINT CK_Usuarios_Rol CHECK (Rol IN (N'Herpetologo', N'TecnicoLaboratorio'))
 );
 
--- Inserción de Especies
 INSERT INTO dbo.EspeciesSerpiente
     (NombreCientifico, NombreComun, Familia, RegionOrigen, TipoVenenoDominante, NivelPeligrosidad, Activa)
 VALUES
@@ -80,7 +71,6 @@ VALUES
     (N'Daboia russelii', N'Víbora de Russell', N'Viperidae', N'Subcontinente Indio', N'Hemotóxico y Nefrotóxico', 5, 1),
     (N'Bungarus multicinctus', N'Krait rayada china', N'Elapidae', N'Sudeste de China y Taiwán', N'Neurotóxico (Alfa-Bungarotoxina)', 5, 1);
 
--- Inserción de Lotes
 INSERT INTO dbo.LotesVeneno
     (CodigoLote, EspecieId, FechaExtraccion, FechaVencimiento, CantidadMiligramos, PurezaPorcentaje, Presentacion, TemperaturaAlmacenamientoC, EstadoCalidad, UsoDestino, Observaciones)
 VALUES
@@ -97,7 +87,6 @@ VALUES
     (N'VEN-AC-2026-001', 10, '2026-04-28', '2028-04-28', 195.40, 96.80, N'Liofilizado', -80.00, N'Aprobado', N'Estudio Antiangiogénico Oncológico', N'Contortrostatina purificada para ensayos celulares in vitro.'),
     (N'VEN-DR-2026-001', 11, '2026-08-05', '2028-08-05', 340.00, 86.00, N'Líquido Ultracongelado', -80.00, N'Cuarentena', N'Reactivo de Coagulación Diagnóstica (RVV)', N'Pendiente validación de activador del Factor X.');
 
--- Inserción de Usuarios Semilla (Contraseña para ambos: "Clave123*")
 INSERT INTO dbo.Usuarios
     (Correo, ClaveHash, Rol)
 VALUES

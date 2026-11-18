@@ -102,4 +102,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// Redirección de la raíz al Swagger UI
+app.MapGet("/", () => Results.Redirect("/swagger"));
+
 app.Run();
